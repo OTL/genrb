@@ -19,7 +19,7 @@ macro(_generate_msg_rb ARG_PKG ARG_MSG ARG_IFLAGS ARG_MSG_DEPS ARG_GEN_OUTPUT_DI
   #Create input and output filenames
   get_filename_component(MSG_SHORT_NAME ${ARG_MSG} NAME_WE)
 
-  set(MSG_GENERATED_NAME _${MSG_SHORT_NAME}.rb)
+  set(MSG_GENERATED_NAME ${MSG_SHORT_NAME}.rb)
   set(GEN_OUTPUT_FILE ${GEN_OUTPUT_DIR}/${MSG_GENERATED_NAME})
 
   add_custom_command(OUTPUT ${GEN_OUTPUT_FILE}
