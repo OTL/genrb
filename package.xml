@@ -6,7 +6,9 @@
   <maintainer email="t.ogura@gmail.com">Takashi Ogura</maintainer>
   <license>BSD</license>
 
-  <url type="website">http://ros.org/wiki/genruby</url>
+  <url type="website">http://wiki.ros.org/genrb</url>
+  <url type="bugtracker">http://github.com/OTL/rosruby</url>
+
   <author email="t.ogura@gmail.com">Takashi Ogura</author>
 
   <buildtool_depend>catkin</buildtool_depend>
