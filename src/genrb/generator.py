@@ -457,7 +457,7 @@ def pack(pattern, vars):
     pattern = reduce_pattern(pattern)
     add_pattern(pattern)
     return serialize("@@struct_%s.pack(%s)"%(convert_to_ruby_pattern(pattern),
-                                            vars))
+                                             vars))
 def pack2(pattern, vars):
     """
     create struct.pack call for when pattern is the name of a variable
@@ -822,6 +822,11 @@ def simple_serializer_generator(msg_context, spec, start, end_point, serialize):
 
     pattern = compute_struct_pattern(spec.types[start:end_point])
     if serialize:
+        bool_vars = [(f, t) for f, t in zip(spec.names[start:end_point], spec.types[start:end_point]) if t == 'bool']
+        for f, t in bool_vars:
+            var = _serial_context+f
+            # TODO: overrite var might causes problem...
+            yield "%s = %s ? 1 : 0" % (var, var)
         yield pack(pattern, vars_)
     else:
         yield "start = end_point"
@@ -835,7 +840,7 @@ def simple_serializer_generator(msg_context, spec, start, end_point, serialize):
         for f, t in bool_vars:
             #TODO: could optimize this as well
             var = _serial_context+f
-            yield "%s = bool(%s)"%(var, var)
+            yield "%s = !%s.zero?" % (var, var)
 
 def serializer_generator(msg_context, spec, serialize, is_numpy):
     """
